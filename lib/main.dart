@@ -9,34 +9,23 @@ import 'package:navigator2_example/screens/login_page.dart';
 import 'package:navigator2_example/screens/profile_page.dart';
 import 'package:provider/provider.dart';
 
+import 'auto_router/app_router.gr.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  CustomParser parser = CustomParser();
-  CustomRouterDelegate customRouterDelegate = CustomRouterDelegate();
+  // final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<CustomRouterDelegate>(
-      create: (context) {
-        customRouterDelegate.setInitialRoutePath(loginConfig);
-        return customRouterDelegate;
-      },
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        routeInformationParser: parser,
-        routerDelegate: customRouterDelegate,
-      ),
+    return  MaterialApp.router(
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
     );
   }
 }
