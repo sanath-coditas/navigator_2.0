@@ -1,8 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:navigator2_example/routes/custom_pages_config.dart';
-import 'package:provider/provider.dart';
-
-import '../routes/custom_router_delegate.dart';
+import 'package:navigator2_example/auto_router/app_router.gr.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,22 +16,19 @@ class HomePage extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           ElevatedButton(
             onPressed: () {
-              Provider.of<CustomRouterDelegate>(context, listen: false)
-                  .setNewRoutePath(cartConfig);
+              AutoRouter.of(context).push(const CartPageRoute());
             },
             child: const Text('Cart Page'),
           ),
           ElevatedButton(
             onPressed: () {
-              Provider.of<CustomRouterDelegate>(context, listen: false)
-                  .setNewRoutePath(checkOutConfig);
+              AutoRouter.of(context).push(const CheckoutPageRoute());
             },
             child: const Text('Checkout Page'),
           ),
           ElevatedButton(
             onPressed: () {
-              Provider.of<CustomRouterDelegate>(context, listen: false)
-                  .setNewRoutePath(profileConfig);
+              AutoRouter.of(context).push(const ProfilePageRoute());
             },
             child: const Text('Profile Page'),
           ),
